@@ -16,3 +16,5 @@ C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\SaveMaestro.pdb
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Newtonsoft.Json.dll
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Newtonsoft.Json.xml
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\SaveMaestro.csproj.CopyComplete
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\FluentFTP.dll
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\FluentFTP.xml

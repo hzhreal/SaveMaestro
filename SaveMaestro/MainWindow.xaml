@@ -28,14 +28,21 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <TextBox x:Name="socketport" HorizontalAlignment="Left" Margin="123,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="socketport" HorizontalAlignment="Left" Margin="123,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="15" Height="29" FontWeight="Normal"/>
         <Label Content="FTP port:" HorizontalAlignment="Left" Margin="1,65,0,0" VerticalAlignment="Top" Width="96"/>
-        <TextBox x:Name="ftpport" HorizontalAlignment="Left" Margin="97,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="psip" HorizontalAlignment="Left" Margin="77,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="29"/>
+        <TextBox x:Name="ftpport" HorizontalAlignment="Left" Margin="97,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="15" Height="28" RenderTransformOrigin="0.533,1.229" FontWeight="Normal"/>
+        <TextBox x:Name="psip" HorizontalAlignment="Left" Margin="77,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="29" FontSize="15" FontWeight="Normal"/>
         <Label Content="PS4 save upload path:" HorizontalAlignment="Left" Margin="1,107,0,0" VerticalAlignment="Top" Width="216"/>
-        <TextBox x:Name="psuploadpath" HorizontalAlignment="Left" Margin="222,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="33"/>
+        <TextBox x:Name="psuploadpath" HorizontalAlignment="Left" Margin="222,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="33" FontSize="15" FontWeight="Normal"/>
         <Label Content="PS4 mount path:" HorizontalAlignment="Left" Margin="0,149,0,0" VerticalAlignment="Top" Width="183"/>
-        <TextBox x:Name="mountpath" HorizontalAlignment="Left" Margin="183,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
+        <TextBox x:Name="mountpath" HorizontalAlignment="Left" Margin="170,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" FontSize="15" FontWeight="Normal" Height="29"/>
+        <Label Content="Account ID converter" HorizontalAlignment="Left" Margin="576,3,0,0" VerticalAlignment="Top" Width="224"/>
+        <Label Content="username:" HorizontalAlignment="Left" Margin="582,34,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Button x:Name="convertid" Content="Convert" HorizontalAlignment="Left" Margin="582,83,0,0" VerticalAlignment="Top" Width="87" Height="32" RenderTransformOrigin="0.623,0.434" Click="convertid_Click"/>
+        <TextBox x:Name="ps_username" HorizontalAlignment="Left" Margin="665,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="15" FontWeight="Normal" Height="28"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="530,117,0,0" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="idblock" HorizontalAlignment="Left" Margin="567,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="20"/>
+        <TextBlock x:Name="username_block" HorizontalAlignment="Left" Margin="566,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 
 </Window>

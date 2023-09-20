@@ -2,6 +2,6 @@
   "ip": "192.168.10.198",
   "s_port": 1234,
   "f_port": 2121,
-  "mount_path": "hi/hi",
-  "upload_path": "real/real"
+  "mount_path": "/data/HTOS/mountfolder",
+  "upload_path": "/data/HTOS/uploadencrypted"
 }

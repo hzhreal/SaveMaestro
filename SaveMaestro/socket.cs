@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Runtime.ExceptionServices;
 using System.IO;
+using SaveMaestro;
+using System.Configuration;
+using System.Windows;
 
 namespace SaveMaestroSocket
 {
-    public static class socket
+    public class socket
     {
-        public static String random_gen()
+        public String random_gen()
         {
             Random random = new Random();
             string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -26,12 +29,17 @@ namespace SaveMaestroSocket
             return randomString.ToString();
         }
 
-        public static void socket_dump(string host, int port, string savename, string mountpath, string random_string)
+        public void socket_dump(string random_string, string savename)
         {
+            config configsocket = new config();
 
-            mountpath = mountpath + random_string;
+            string host = configsocket.ip;
+            int port = configsocket.s_port;
+            string mountpath = configsocket.mount_path;
 
-            string jsonRequest = $"{{\"RequestType\": \"rtDumpSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath}\", \"dumpOnly\": []}}\r\n";
+            string mountpath_new = mountpath + random_string;
+
+            string jsonRequest = $"{{\"RequestType\": \"rtDumpSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath_new}\", \"dumpOnly\": []}}\r\n";
 
             try
             {
@@ -51,6 +59,7 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
+                    MessageBox.Show($"Dump response: {response}");
                 }
             }
             
@@ -61,11 +70,17 @@ namespace SaveMaestroSocket
 
         }
 
-        public static void socket_update(string host, int port, string savename, string mountpath, string random_string)
+        public void socket_update(string random_string, string savename)
         {
-            mountpath = mountpath + random_string;
+            config configsocket = new config();
 
-            string jsonRequest = $"{{\"RequestType\": \"rtUpdateSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath}\", \"UpdateOnly\": []}}\r\n";
+            string host = configsocket.ip;
+            int port = configsocket.s_port;
+            string mountpath = configsocket.mount_path;
+
+            string mountpath_new = mountpath + random_string;
+
+            string jsonRequest = $"{{\"RequestType\": \"rtUpdateSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath_new}\", \"UpdateOnly\": []}}\r\n";
 
             try
             {
@@ -85,6 +100,7 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
+                    MessageBox.Show($"Update response: {response}");
                 }
             }
 

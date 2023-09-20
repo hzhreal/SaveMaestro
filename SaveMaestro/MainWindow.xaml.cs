@@ -16,9 +16,21 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Xml.Serialization;
 using SaveMaestroSocket;
+using System.Net;
+using System.Net.Http;
+using FluentFTP.Proxy.AsyncProxy;
 
 namespace SaveMaestro
 {
+    public class config
+    {
+        public String ip { get; set; }
+        public int s_port { get; set; }
+        public int f_port { get; set; }
+        public String mount_path { get; set; }
+        public String upload_path { get; set; }
+
+    }
     public partial class MainWindow : Window
     {
 
@@ -28,16 +40,6 @@ namespace SaveMaestro
         {
             InitializeComponent();
             readconfig();
-        }
-
-        public class config
-        {
-            public String ip { get; set; }
-            public int s_port { get; set; }
-            public int f_port { get; set; }
-            public String mount_path { get; set; }
-            public String upload_path { get; set; }
-
         }
 
         public void readconfig()
@@ -84,6 +86,50 @@ namespace SaveMaestro
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
+        }
+
+        private async void convertid_Click(object sender, RoutedEventArgs e)
+        {
+            idblock.Text = String.Empty;
+            username_block.Text = String.Empty;
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = $"https://psn.flipscreen.games/search.php?username={ps_username.Text}";
+
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonContent = await response.Content.ReadAsStringAsync();
+                        dynamic data = JsonConvert.DeserializeObject(jsonContent);
+
+              
+                        dynamic userId = Convert.ToInt64(data["user_id"]);
+                        userId = userId.ToString("X");
+                        userId = userId.ToLower();
+
+                        idblock.Text = userId;
+                        username_block.Text = ps_username.Text;
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
+                    }
+
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+
+            ps_username.Text = string.Empty;
         }
     }
 }
