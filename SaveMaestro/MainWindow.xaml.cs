@@ -19,6 +19,7 @@ using SaveMaestroSocket;
 using System.Net;
 using System.Net.Http;
 using FluentFTP.Proxy.AsyncProxy;
+using Resign;
 
 namespace SaveMaestro
 {
@@ -130,6 +131,12 @@ namespace SaveMaestro
             }
 
             ps_username.Text = string.Empty;
+        }
+
+        private void Resign_button_Click(object sender, RoutedEventArgs e)
+        {
+            ResignWindow win2 = new ResignWindow();
+            win2.Show();
         }
     }
 }
