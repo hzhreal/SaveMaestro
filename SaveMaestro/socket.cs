@@ -9,6 +9,9 @@ using System.IO;
 using SaveMaestro;
 using System.Configuration;
 using System.Windows;
+using Resign;
+using System.Runtime.Remoting.Messaging;
+using System.CodeDom;
 
 namespace SaveMaestroSocket
 {
@@ -29,15 +32,8 @@ namespace SaveMaestroSocket
             return randomString.ToString();
         }
 
-        public void socket_dump(string random_string, string savename)
+        public string socket_dump(string mountpath_new, string savename, string host, int port)
         {
-            config configsocket = new config();
-
-            string host = configsocket.ip;
-            int port = configsocket.s_port;
-            string mountpath = configsocket.mount_path;
-
-            string mountpath_new = mountpath + random_string;
 
             string jsonRequest = $"{{\"RequestType\": \"rtDumpSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath_new}\", \"dumpOnly\": []}}\r\n";
 
@@ -59,28 +55,23 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
-                    MessageBox.Show($"Dump response: {response}");
+                    return response;
                 }
+
             }
             
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
+                return "None";
             }
 
         }
 
-        public void socket_update(string random_string, string savename)
+        public string socket_update(string mountpath_new, string savename, string host, int port)
         {
-            config configsocket = new config();
 
-            string host = configsocket.ip;
-            int port = configsocket.s_port;
-            string mountpath = configsocket.mount_path;
-
-            string mountpath_new = mountpath + random_string;
-
-            string jsonRequest = $"{{\"RequestType\": \"rtUpdateSave\", \"sourceSaveName\": \"{savename}\", \"targetFolder\": \"{mountpath_new}\", \"UpdateOnly\": []}}\r\n";
+            string jsonRequest = $"{{\"RequestType\": \"rtUpdateSave\", \"targetSaveName\": \"{savename}\", \"sourceFolder\": \"{mountpath_new}\", \"selectOnly\": []}}\r\n";
 
             try
             {
@@ -100,7 +91,7 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
-                    MessageBox.Show($"Update response: {response}");
+                    return response;
                 }
             }
 
@@ -108,6 +99,7 @@ namespace SaveMaestroSocket
             catch(Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
+                return "None";
             }
         }
 

@@ -30,12 +30,11 @@ namespace SaveMaestro
         public int f_port { get; set; }
         public String mount_path { get; set; }
         public String upload_path { get; set; }
-
     }
     public partial class MainWindow : Window
     {
 
-        config configmain = new config();
+         config configmain = new config();
 
         public MainWindow()
         {
