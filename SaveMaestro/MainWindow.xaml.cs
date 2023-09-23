@@ -20,6 +20,8 @@ using System.Net;
 using System.Net.Http;
 using FluentFTP.Proxy.AsyncProxy;
 using Resign;
+using Decrypt;
+using Import;
 
 namespace SaveMaestro
 {
@@ -136,6 +138,18 @@ namespace SaveMaestro
         {
             ResignWindow win2 = new ResignWindow();
             win2.Show();
+        }
+
+        private void Decrypt_button_Click(object sender, RoutedEventArgs e)
+        {
+            DecryptWindow win3 = new DecryptWindow();
+            win3.Show();
+        }
+
+        private void Import_button_Click(object sender, RoutedEventArgs e)
+        {
+            ImportWindow win4 = new ImportWindow();
+            win4.Show();
         }
     }
 }

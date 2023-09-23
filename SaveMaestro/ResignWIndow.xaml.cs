@@ -60,125 +60,134 @@ namespace Resign
 
         private async void begin_resign_Click(object sender, RoutedEventArgs e)
         {
-            socket s_resign = new socket();
-            FTP f_resign = new FTP();
-
-            string host = config.ip;
-            int s_port = config.s_port;
-            int f_port = config.f_port;
-
-            string randomString = s_resign.random_gen();
-            string mpath = config.mount_path + $"/{randomString}";
-            string upath1 = config.upload_path;
-            string accountid = accountid_resign.Text;
-            List<string> files = new List<string>();
-
-            async Task cleanup(string delfiles, string randomString1)
+            if (filepaths.Items.Count == 2)
             {
-                
-                await f_resign.rmdir(mpath, host, f_port);
+                socket s_resign = new socket();
+                FTP f_resign = new FTP();
 
-                if (delfiles != null)
-                {
-                    await f_resign.deletefiles2(delfiles, host, f_port);
-                }
-                else
-                {
-                    await f_resign.rmdir(upath1, host , f_port);
-                    await f_resign.mkdir(upath1, host , f_port);
-                }
+                string host = config.ip;
+                int s_port = config.s_port;
+                int f_port = config.f_port;
 
-                if (randomString1 != null)
-                {
-                    string tempdir = System.IO.Path.Combine("temp", randomString1);
+                string randomString = s_resign.random_gen();
+                string mpath = config.mount_path + $"/{randomString}";
+                string upath1 = config.upload_path;
+                string accountid = accountid_resign.Text;
+                List<string> files = new List<string>();
 
-                    if (Directory.Exists(tempdir))
+                async Task cleanup(string delfiles, string randomString1)
+                {
+
+                    await f_resign.rmdir(mpath, host, f_port);
+
+                    if (delfiles != null)
                     {
-                        Directory.Delete(tempdir, true);
+                        await f_resign.deletefiles2(delfiles, host, f_port);
+                    }
+                    else
+                    {
+                        await f_resign.rmdir(upath1, host, f_port);
+                        await f_resign.mkdir(upath1, host, f_port);
+                    }
+
+                    if (randomString1 != null)
+                    {
+                        string tempdir = System.IO.Path.Combine("temp", randomString1);
+
+                        if (Directory.Exists(tempdir))
+                        {
+                            Directory.Delete(tempdir, true);
+                        }
+                    }
+
+                    else
+                    {
+                        if (Directory.Exists("temp"))
+                        {
+                            Directory.Delete("temp", true);
+                        }
                     }
                 }
-                
-                else
+
+                try
                 {
-                    if (Directory.Exists("temp"))
+                    // Gather files and setup paths
+
+                    foreach (string item in filepaths.Items)
                     {
-                        Directory.Delete("temp", true);
+                        files.Add(item);
                     }
+
+
+                    string pathex = files[0];
+                    string localdir = System.IO.Path.GetDirectoryName(pathex);
+
+                    string savename = System.IO.Path.GetFileName(pathex);
+
+                    if (savename.EndsWith(".bin"))
+                    {
+                        savename = System.IO.Path.GetFileNameWithoutExtension(savename);
+                    }
+
+                    string savepath = mpath + $"/{savename}";
+                    string delfiles = upath1 + $"/{savename}";
+
+                    string upath = config.upload_path + $"/{savename}";
+
+                    // Start the operation and update UI accordingly
+
+                    UpdateTerminal("Operation started...");
+
+                    // Create a CancellationTokenSource to handle cancellation if needed
+                    CancellationTokenSource cts = new CancellationTokenSource();
+
+                    // Use Task.Run to run the long-running operations in the background
+                    await Task.Run(async () =>
+                    {
+                        // Perform time-consuming operations here
+                        await f_resign.mkdir(mpath, host, f_port);
+                        UpdateTerminal("Created mountdir");
+
+                        await f_resign.uploadsaves2(upath1, files, host, f_port);
+                        UpdateTerminal("Uploaded saves");
+
+                        string response = s_resign.socket_dump(mpath, savename, host, s_port);
+                        UpdateTerminal($"Dump response: {response}");
+
+                        Task<string> title_id = f_resign.param_io(mpath, accountid, host, f_port, randomString);
+                        string titleid = await title_id;
+                        UpdateTerminal("Param processes complete");
+
+                        string finalpath = System.IO.Path.Combine(randomString, "PS4", "SAVEDATA", accountid, titleid);
+
+                        Console.WriteLine(finalpath);
+
+                        string response1 = s_resign.socket_update(mpath, savename, host, s_port);
+                        UpdateTerminal($"Update response: {response1}");
+
+                        await f_resign.downloadfiles2(finalpath, upath, host, f_port);
+                        UpdateTerminal("Downloaded saves\nDone!");
+
+                        await cleanup(delfiles, randomString);
+
+                        string fullpath = System.IO.Path.GetFullPath(finalpath);
+                        UpdateTerminal($"Operation completed successfully.\n{fullpath}");
+
+
+                    }, cts.Token);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}\nAttempting cleanup...");
+                    await cleanup(null, null);
                 }
             }
 
-            try
+            else
             {
-                // Gather files and setup paths
-
-                foreach (string item in filepaths.Items)
-                {
-                    files.Add(item);
-                }
-
-
-                string pathex = files[0];
-                string localdir = System.IO.Path.GetDirectoryName(pathex);
-
-                string savename = System.IO.Path.GetFileName(pathex);
-
-                if (savename.EndsWith(".bin"))
-                {
-                    savename = System.IO.Path.GetFileNameWithoutExtension(savename);
-                }
-
-                string savepath = mpath + $"/{savename}";
-                string delfiles = upath1 + $"/{savename}";
-
-                string upath = config.upload_path + $"/{savename}";
-
-                // Start the operation and update UI accordingly
-
-                UpdateTerminal("Operation started...");
-
-                // Create a CancellationTokenSource to handle cancellation if needed
-                CancellationTokenSource cts = new CancellationTokenSource();
-
-                // Use Task.Run to run the long-running operations in the background
-                await Task.Run(async () =>
-                {
-                    // Perform time-consuming operations here
-                    await f_resign.mkdir(mpath, host, f_port);
-                    UpdateTerminal("Created mountdir");
-
-                    await f_resign.uploadsaves2(upath1, files, host, f_port);
-                    UpdateTerminal("Uploaded saves");
-
-                    string response = s_resign.socket_dump(mpath, savename, host, s_port);
-                    UpdateTerminal($"Dump response: {response}");
-
-                    Task<string> title_id = f_resign.param_io(mpath, accountid, host, f_port, randomString);
-                    string titleid = await title_id;
-                    UpdateTerminal("Param processes complete");
-
-                    string finalpath = System.IO.Path.Combine(randomString, "PS4", "SAVEDATA", accountid, titleid);
-                    
-                    Console.WriteLine(finalpath);
-
-                    string response1 = s_resign.socket_update(mpath, savename, host, s_port);
-                    UpdateTerminal($"Update response: {response1}");
-
-                    await f_resign.downloadfiles2(finalpath, upath, host, f_port);
-                    UpdateTerminal("Downloaded saves\nDone!");
-
-                    await cleanup(delfiles, randomString);
-
-                    string fullpath = System.IO.Path.GetFullPath(finalpath);
-                    UpdateTerminal($"Operation completed successfully.\n{fullpath}");
-
-
-                }, cts.Token);
+                MessageBox.Show("Error, make sure you select 2 files");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}\nAttempting cleanup...");
-                await cleanup(null, null);
-            }
+           
         }
 
         private void UpdateTerminal(string message)

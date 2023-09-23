@@ -1,4 +1,5 @@
-<Window x:Name="Resign" x:Class="Resign.ResignWindow"
+<Window 
+	    x:Name="Resign" x:Class="Resign.ResignWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -29,9 +30,9 @@
         </Border>
         <Button x:Name="selectfiles" Content="Select Files" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Click="selectfiles_Click" Width="220"/>
         <Button x:Name="begin_resign" Content="Go" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Click="begin_resign_Click" Width="220"/>
-        <TextBlock x:Name="terminal_resign" Text="Process terminal" Margin="10,367,434,71" Foreground="White" FontSize="15" FontWeight="Normal"/>
-        <TextBox x:Name="accountid_resign" HorizontalAlignment="Left" Margin="444,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="20"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="411,15,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
+        <TextBlock x:Name="terminal_resign" Text="Process terminal" Margin="10,363,10,75" Foreground="White" FontSize="10" FontWeight="Normal"/>
+        <TextBox x:Name="accountid_resign" HorizontalAlignment="Left" Margin="50,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="20"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="17,217,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
         <Button x:Name="clear_paths" Content="Clear" HorizontalAlignment="Left" Margin="252,30,0,0" VerticalAlignment="Top" Click="clear_paths_Click" Width="114"/>
     </Grid>
 </Window>

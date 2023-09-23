@@ -159,6 +159,34 @@ namespace SaveMaestroFTP
         
         }
 
+        public string obtain_titleid(string randomString)
+        {
+            string param_path = System.IO.Path.Combine(randomString, "sce_sys", "param.sfo");
+            long offset1 = 0xA9C; // one of the title id offsets
+        
+
+            try
+            {
+                using (FileStream param = new FileStream(param_path, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes1 = new byte[9];
+                    param.Seek(offset1, SeekOrigin.Begin);
+                    param.Read(bytes1, 0, 9);
+
+                    string titleid = Encoding.UTF8.GetString(bytes1);
+
+                    Console.WriteLine($"Obtained title id: {titleid}");
+                    return titleid;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                return null;
+            }
+        }
+
 
 
         public async Task downloadfiles2(string localpath, string savepath, string host, int port)
@@ -201,6 +229,45 @@ namespace SaveMaestroFTP
             }
 
             catch(Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        public async Task downloadfolder(string randomString, string mpath, string host, int port)
+        {
+            try
+            {
+                var token = new CancellationToken();
+
+                using (AsyncFtpClient ftp = new AsyncFtpClient(host, port))
+                {
+                    await ftp.Connect(token);
+                    await ftp.DownloadDirectory(randomString, mpath, FtpFolderSyncMode.Update, token: token);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        public async Task uploadfolder(string lpath, string mpath, string host, int port)
+        {
+
+            try
+            {
+                var token = new CancellationToken();
+
+                using (AsyncFtpClient ftp = new AsyncFtpClient(host, port))
+                {
+                    await ftp.Connect(token);
+                    await ftp.UploadDirectory(lpath, mpath, FtpFolderSyncMode.Update, FtpRemoteExists.Overwrite, token: token);
+                }
+            }
+
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }

@@ -64,6 +64,8 @@
         <TextBox x:Name="idblock" HorizontalAlignment="Left" Margin="588,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="20"/>
         <TextBlock x:Name="username_block" HorizontalAlignment="Left" Margin="566,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="Resign_button" Margin="68,338,629,190" Content="Resign" Click="Resign_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="Decrypt_button" Margin="240,338,457,190" Content="Decrypt" Click="Decrypt_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="Import_button" Margin="418,338,279,190" Content="Import" Click="Import_button_Click" RenderTransformOrigin="0.789,0.251"/>
     </Grid>
 
 </Window>
