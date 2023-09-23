@@ -73,12 +73,38 @@ namespace Resign
             string accountid = accountid_resign.Text;
             List<string> files = new List<string>();
 
-            async Task cleanup()
+            async Task cleanup(string delfiles, string randomString1)
             {
-                await f_resign.rmdir(upath1, host, f_port);
+                
                 await f_resign.rmdir(mpath, host, f_port);
 
-                await f_resign.mkdir(upath1, host, f_port);
+                if (delfiles != null)
+                {
+                    await f_resign.deletefiles2(delfiles, host, f_port);
+                }
+                else
+                {
+                    await f_resign.rmdir(upath1, host , f_port);
+                    await f_resign.mkdir(upath1, host , f_port);
+                }
+
+                if (randomString1 != null)
+                {
+                    string tempdir = System.IO.Path.Combine("temp", randomString1);
+
+                    if (Directory.Exists(tempdir))
+                    {
+                        Directory.Delete(tempdir, true);
+                    }
+                }
+                
+                else
+                {
+                    if (Directory.Exists("temp"))
+                    {
+                        Directory.Delete("temp", true);
+                    }
+                }
             }
 
             try
@@ -102,6 +128,7 @@ namespace Resign
                 }
 
                 string savepath = mpath + $"/{savename}";
+                string delfiles = upath1 + $"/{savename}";
 
                 string upath = config.upload_path + $"/{savename}";
 
@@ -125,11 +152,11 @@ namespace Resign
                     string response = s_resign.socket_dump(mpath, savename, host, s_port);
                     UpdateTerminal($"Dump response: {response}");
 
-                    Task<string> title_id = f_resign.param_io(mpath, accountid, host, f_port);
+                    Task<string> title_id = f_resign.param_io(mpath, accountid, host, f_port, randomString);
                     string titleid = await title_id;
                     UpdateTerminal("Param processes complete");
 
-                    string finalpath = System.IO.Path.Combine("PS4", "SAVEDATA", accountid, titleid);
+                    string finalpath = System.IO.Path.Combine(randomString, "PS4", "SAVEDATA", accountid, titleid);
                     
                     Console.WriteLine(finalpath);
 
@@ -139,16 +166,18 @@ namespace Resign
                     await f_resign.downloadfiles2(finalpath, upath, host, f_port);
                     UpdateTerminal("Downloaded saves\nDone!");
 
-                    await cleanup();
+                    await cleanup(delfiles, randomString);
+
+                    string fullpath = System.IO.Path.GetFullPath(finalpath);
+                    UpdateTerminal($"Operation completed successfully.\n{fullpath}");
+
 
                 }, cts.Token);
-
-                UpdateTerminal("Operation completed successfully.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}\nAttempting cleanup...");
-                await cleanup();
+                await cleanup(null, null);
             }
         }
 
@@ -158,6 +187,10 @@ namespace Resign
             Dispatcher.Invoke(() => { terminal_resign.Text = message; });
         }
 
+        private void clear_paths_Click(object sender, RoutedEventArgs e)
+        {
+            filepaths.Items.Clear();
+        }
     }
 
 }

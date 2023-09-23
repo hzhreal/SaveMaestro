@@ -34,7 +34,7 @@ namespace SaveMaestro
     public partial class MainWindow : Window
     {
 
-         config configmain = new config();
+        config configmain = new config();
 
         public MainWindow()
         {

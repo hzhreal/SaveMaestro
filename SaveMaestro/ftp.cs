@@ -98,9 +98,9 @@ namespace SaveMaestroFTP
             }
         }
 
-        public async Task<string> param_io(string mountpath, string account_id, string host, int port)
+        public async Task<string> param_io(string mountpath, string account_id, string host, int port, string randomString)
         {
-            string param_local = System.IO.Path.Combine("temp", "param", "param.sfo");
+            string param_local = System.IO.Path.Combine("temp", randomString, "param", "param.sfo");
             string path = mountpath + "/sce_sys/param.sfo";
             long offset = 0x15C; // account id offset
             ulong accid = Convert.ToUInt64(account_id, 16);
@@ -184,6 +184,26 @@ namespace SaveMaestroFTP
                 MessageBox.Show($"Error: {ex.Message}");
             }
         
+        }
+
+        public async Task deletefiles2(string filepath, string host, int port)
+        {
+            try
+            {
+                var token = new CancellationToken();
+
+                using (AsyncFtpClient ftp = new AsyncFtpClient(host, port))
+                {
+                    await ftp.Connect(token);
+                    await ftp.DeleteFile(filepath, token);
+                    await ftp.DeleteFile(filepath + ".bin", token);
+                }
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
     }   
