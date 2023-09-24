@@ -31,8 +31,8 @@
         <Button x:Name="selectfiles" Content="Select Files" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Click="selectfiles_Click" Width="220"/>
         <Button x:Name="begin_resign" Content="Go" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Click="begin_resign_Click" Width="220"/>
         <TextBlock x:Name="terminal_resign" Text="Process terminal" Margin="10,363,10,75" Foreground="White" FontSize="10" FontWeight="Normal"/>
-        <TextBox x:Name="accountid_resign" HorizontalAlignment="Left" Margin="50,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="20"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="17,217,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
+        <TextBox x:Name="accountid_resign" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="53"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
         <Button x:Name="clear_paths" Content="Clear" HorizontalAlignment="Left" Margin="252,30,0,0" VerticalAlignment="Top" Click="clear_paths_Click" Width="114"/>
     </Grid>
 </Window>
