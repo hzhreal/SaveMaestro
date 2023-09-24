@@ -6,7 +6,7 @@ Application to resign, decrypt and re-region PS4 saves.
 - Decrypting
 - Modifiyng/importing the decrypted save folder
 - Re-regioning
-- Multiple windows doing their own processes. Dont go too crazy with this and make sure the ftp server can handle multiple processes. For example https://github.com/hippie68/ps4-ftp/releases/tag/v1.08a.
+- Multiple windows doing their own processes (dont go too crazy with this)
 - Account ID converter from username
 
 # Tutorial
@@ -20,10 +20,10 @@ Application to resign, decrypt and re-region PS4 saves.
 # Disclaimers
 - Saves created using this application will work on SaveWizard as long as you copy it from your PS4.
 - Custom save encryption are not yet handled.
-- Make sure to use the latest goldhen beta payload for the ftp server, or use hippie68's. This is essential for the ftp code to function.
+- Make sure you have .NET Framework 4.7.2 installed.
 
 # No jailbroken PS4?
-- Join my discord where I have a bot that can do the same operations, free to use and often hosted and we also have a bot for ps3 avatars. https://discord.gg/fHfmjaCXtb.
+- Join my discord where I have a bot that can do the same operations, free to use and often hosted. https://discord.gg/fHfmjaCXtb.
 
 # Credits
-- https://github.com/Team-Alua/cecie.nim for creating the homebrew app that makes this possible
+- https://github.com/Team-Alua/cecie.nim for creating the homebrew app that makes this possible.
