@@ -24,9 +24,12 @@ namespace Decrypt
         {
             try
             {
-                String json = File.ReadAllText("config.json");
+                if (File.Exists("config.json"))
+                {
+                    String json = File.ReadAllText("config.json");
 
-                config = JsonConvert.DeserializeObject<config>(json);
+                    config = JsonConvert.DeserializeObject<config>(json);
+                }
             }
 
             catch (Exception ex)

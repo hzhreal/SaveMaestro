@@ -32,6 +32,31 @@ namespace SaveMaestroSocket
             return randomString.ToString();
         }
 
+
+        public bool checkaccid(string accid)
+        {
+            if (accid.Length != 16)
+            {
+                return false;
+            }
+
+            else if (accid.Any(ch => ! char.IsLetterOrDigit(ch)))
+            {
+                return false;
+            }
+
+            else if (accid.Contains(" "))
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+
         public string socket_dump(string mountpath_new, string savename, string host, int port)
         {
 

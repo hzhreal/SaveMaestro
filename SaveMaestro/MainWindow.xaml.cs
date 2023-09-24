@@ -22,6 +22,7 @@ using FluentFTP.Proxy.AsyncProxy;
 using Resign;
 using Decrypt;
 using Import;
+using Reregion;
 
 namespace SaveMaestro
 {
@@ -48,9 +49,13 @@ namespace SaveMaestro
         {
             try
             {
-                String json = File.ReadAllText("config.json");
+                if (File.Exists("config.json"))
+                {
+                    String json = File.ReadAllText("config.json");
 
-                configmain = JsonConvert.DeserializeObject<config>(json);
+                    configmain = JsonConvert.DeserializeObject<config>(json);
+                }
+
             }
 
             catch (Exception ex)
@@ -94,41 +99,51 @@ namespace SaveMaestro
         {
             idblock.Text = String.Empty;
             username_block.Text = String.Empty;
-            try
+            string username = ps_username.Text;
+
+            if (!username.Contains(" ") && username.Length > 0)
             {
-
-                using (HttpClient client = new HttpClient())
+                try
                 {
-                    string url = $"https://psn.flipscreen.games/search.php?username={ps_username.Text}";
 
-                    HttpResponseMessage response = await client.GetAsync(url);
-
-                    if (response.IsSuccessStatusCode)
+                    using (HttpClient client = new HttpClient())
                     {
-                        string jsonContent = await response.Content.ReadAsStringAsync();
-                        dynamic data = JsonConvert.DeserializeObject(jsonContent);
+                        string url = $"https://psn.flipscreen.games/search.php?username={username}";
 
-              
-                        dynamic userId = Convert.ToInt64(data["user_id"]);
-                        userId = userId.ToString("X");
-                        userId = userId.ToLower();
+                        HttpResponseMessage response = await client.GetAsync(url);
 
-                        idblock.Text = userId;
-                        username_block.Text = ps_username.Text;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string jsonContent = await response.Content.ReadAsStringAsync();
+                            dynamic data = JsonConvert.DeserializeObject(jsonContent);
+
+
+                            dynamic userId = Convert.ToInt64(data["user_id"]);
+                            userId = userId.ToString("X");
+                            userId = userId.ToLower();
+
+                            idblock.Text = userId;
+                            username_block.Text = username;
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
+                        }
+
+
                     }
+                }
 
-                    else
-                    {
-                        MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
-                    }
-
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
                 }
             }
-
-            catch (Exception ex)
+            
+            else
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show("Make sure you input a username in a valid format");
             }
 
             ps_username.Text = string.Empty;
@@ -150,6 +165,12 @@ namespace SaveMaestro
         {
             ImportWindow win4 = new ImportWindow();
             win4.Show();
+        }
+
+        private void Reregion_button_Click(object sender, RoutedEventArgs e)
+        {
+            ReregionWindow win5 = new ReregionWindow();
+            win5.Show();
         }
     }
 }

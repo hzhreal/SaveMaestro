@@ -27,3 +27,5 @@ C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\Import.baml
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Ookii.Dialogs.Wpf.dll
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Ookii.Dialogs.Wpf.pdb
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Ookii.Dialogs.Wpf.xml
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\Reregion.g.cs
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\Reregion.baml

@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Reflection;
 using System.IO.Pipes;
 using System.Threading;
+using System.Windows.Media.Animation;
 
 namespace SaveMaestroFTP
 {
@@ -273,6 +274,63 @@ namespace SaveMaestroFTP
             }
         }
 
+
+       public async Task reregion(string randomString, string mountpath, string account_id, string titleid, string host, int port)
+        {
+            string keystonepath_local = System.IO.Path.Combine(randomString, "sce_sys", "keystone");
+            string parampath_local = System.IO.Path.Combine(randomString, "sce_sys", "param.sfo");
+            string parampath_remote = mountpath + "/sce_sys/param.sfo";
+            string keystonepath_remote = mountpath + "/sce_sys/keystone";
+            ulong accid = Convert.ToUInt64(account_id, 16);
+            long offset_1 = 0xA9C; // title id offset 1
+            long offset_2 = 0x61C; // title id offset 2
+            long offset = 0x15C; // account id offset
+            byte[] titleid_bytes = Encoding.UTF8.GetBytes(titleid);
+
+            try
+            {
+                var token = new CancellationToken();
+
+                using (AsyncFtpClient ftp = new AsyncFtpClient(host, port))
+                {
+                    await ftp.Connect(token);
+                    await ftp.UploadFile(keystonepath_local, keystonepath_remote, FtpRemoteExists.Overwrite, true, FtpVerify.Retry, token: token);
+                }
+
+                Console.WriteLine("Uploaded keystone");
+
+                using (FileStream param = new FileStream(parampath_local, FileMode.Open, FileAccess.Write))
+                {
+
+                    param.Seek(offset_1, SeekOrigin.Begin);
+                    param.Write(titleid_bytes, 0, titleid_bytes.Length);
+
+                    param.Seek(offset_2, SeekOrigin.Begin);
+                    param.Write(titleid_bytes, 0, titleid_bytes.Length);
+
+                    param.Seek(offset, SeekOrigin.Begin);
+                    byte[] bytes = BitConverter.GetBytes(accid);
+                    param.Write(bytes, 0, bytes.Length);
+
+                }
+
+                Console.WriteLine("Resigned and wrote titleid");
+
+
+                using (AsyncFtpClient ftp = new AsyncFtpClient(host, port))
+                {
+                    await ftp.Connect(token);
+                    await ftp.UploadFile(parampath_local, parampath_remote, FtpRemoteExists.Overwrite, true, FtpVerify.Retry, token: token);
+                }
+
+                Console.WriteLine("Uploaded param");
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
     }   
 
 }

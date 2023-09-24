@@ -37,9 +37,12 @@ namespace Import
         {
             try
             {
-                String json = System.IO.File.ReadAllText("config.json");
+                if (System.IO.File.Exists("config.json"))
+                {
+                    String json = System.IO.File.ReadAllText("config.json");
 
-                config = JsonConvert.DeserializeObject<config>(json);
+                    config = JsonConvert.DeserializeObject<config>(json);
+                }
             }
 
             catch (Exception ex)
@@ -47,6 +50,7 @@ namespace Import
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
+
 
         private void selectfiles_Click(object sender, RoutedEventArgs e)
         {
@@ -65,10 +69,12 @@ namespace Import
 
         private async void begin_import_Click(object sender, RoutedEventArgs e)
         {
-            if (filepaths.Items.Count == 2)
+            socket s_import = new socket();
+            FTP f_import = new FTP();
+            string accountid = accountid_import.Text;
+
+            if (filepaths.Items.Count == 2 && s_import.checkaccid(accountid) == true)
             {
-                socket s_import = new socket();
-                FTP f_import = new FTP();
 
                 string host = config.ip;
                 int s_port = config.s_port;
@@ -77,7 +83,6 @@ namespace Import
                 string randomString = s_import.random_gen();
                 string mpath = config.mount_path + $"/{randomString}";
                 string upath1 = config.upload_path;
-                string accountid = accountid_import.Text;
                 List<string> files = new List<string>();
 
                 async Task cleanup(string delfiles, string randomString1)
@@ -185,7 +190,7 @@ namespace Import
 
             else
             {
-                MessageBox.Show("Error, make sure you select 2 files");
+                MessageBox.Show("Error, make sure you select 2 files and input an account ID in a valid format");
             }
             
         }
