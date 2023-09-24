@@ -22,7 +22,7 @@ Application to resign, decrypt and re-region PS4 saves.
 - Custom save encryption are not yet handled.
 
 # No jailbroken PS4?
-- Join my discord where I have a bot that can do the same operations, free to use and often hosted. https://discord.gg/fHfmjaCXtb.
+- Join my discord where I have a bot that can do the same operations, free to use and often hosted and we also have a bot for ps3 avatars. https://discord.gg/fHfmjaCXtb.
 
 # Credits
 - https://github.com/Team-Alua/cecie.nim for creating the homebrew app that makes this possible
