@@ -21,7 +21,7 @@ Application to resign, decrypt and re-region PS4 saves.
 - Saves created using this application will work on SaveWizard as long as you copy it from your PS4.
 - Custom save encryption are not yet handled.
 - Make sure you have .NET Framework 4.7.2 installed.
-
+- Remember to not have the same folder for mount and upload. Have them in different folders, for example /data/example/mount & /data/example/upload..
 # No jailbroken PS4?
 - Join my discord where I have a bot that can do the same operations, free to use and often hosted. https://discord.gg/fHfmjaCXtb.
 
