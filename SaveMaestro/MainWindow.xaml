@@ -49,20 +49,20 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <TextBox x:Name="socketport" HorizontalAlignment="Left" Margin="124,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" FontSize="15" Height="33" FontWeight="Normal" RenderTransformOrigin="0.3,0.453"/>
+        <TextBox x:Name="socketport" HorizontalAlignment="Left" Margin="124,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" FontSize="15" Height="45" FontWeight="Normal" RenderTransformOrigin="0.3,0.453"/>
         <Label Content="FTP Port:" HorizontalAlignment="Left" Margin="6,101,0,0" VerticalAlignment="Top" Width="96" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
-        <TextBox x:Name="ftpport" HorizontalAlignment="Left" Margin="97,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" FontSize="15" Height="35" RenderTransformOrigin="0.533,1.229" FontWeight="Normal"/>
-        <TextBox x:Name="psip" HorizontalAlignment="Left" Margin="82,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="33" FontSize="15" FontWeight="Normal" RenderTransformOrigin="1.242,1.097"/>
+        <TextBox x:Name="ftpport" HorizontalAlignment="Left" Margin="94,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" FontSize="15" Height="43" RenderTransformOrigin="0.533,1.229" FontWeight="Normal"/>
+        <TextBox x:Name="psip" HorizontalAlignment="Left" Margin="70,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="54" FontSize="15" FontWeight="Normal" RenderTransformOrigin="1.242,1.097"/>
         <Label Content="PS4 Save Upload Path:" HorizontalAlignment="Left" Margin="6,141,0,0" VerticalAlignment="Top" Width="216" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
-        <TextBox x:Name="psuploadpath" HorizontalAlignment="Left" Margin="222,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="37" FontSize="15" FontWeight="Normal"/>
+        <TextBox x:Name="psuploadpath" HorizontalAlignment="Left" Margin="222,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="40" FontSize="15" FontWeight="Normal"/>
         <Label Content="PS4 Mount Path:" HorizontalAlignment="Left" Margin="6,180,0,0" VerticalAlignment="Top" Width="183" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
-        <TextBox x:Name="mountpath" HorizontalAlignment="Left" Margin="171,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="15" FontWeight="Normal" Height="35"/>
+        <TextBox x:Name="mountpath" HorizontalAlignment="Left" Margin="168,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="15" FontWeight="Normal" Height="42"/>
         <Label Content="Account ID Converter" HorizontalAlignment="Left" Margin="552,5,0,0" VerticalAlignment="Top" Width="217" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="552,47,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
         <Button x:Name="convertid" Content="Convert" HorizontalAlignment="Left" Margin="635,90,0,0" VerticalAlignment="Top" Width="87" Height="32" RenderTransformOrigin="0.623,0.434" Click="convertid_Click"/>
         <TextBox x:Name="ps_username" HorizontalAlignment="Left" Margin="635,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" FontSize="15" FontWeight="Normal" Height="43"/>
         <Label Content="ID:" HorizontalAlignment="Left" Margin="552,140,0,0" VerticalAlignment="Top" Width="48" Foreground="White" RenderTransformOrigin="0.021,0.548" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light"/>
-        <TextBox x:Name="idblock" HorizontalAlignment="Left" Margin="588,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="33"/>
+        <TextBox x:Name="idblock" HorizontalAlignment="Left" Margin="588,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="39"/>
         <TextBlock x:Name="username_block" HorizontalAlignment="Left" Margin="566,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="Resign_button" Margin="68,338,629,190" Content="Resign" Click="Resign_button_Click" RenderTransformOrigin="0.789,0.251"/>
         <Button x:Name="Decrypt_button" Margin="240,338,457,190" Content="Decrypt" Click="Decrypt_button_Click" RenderTransformOrigin="0.789,0.251"/>
