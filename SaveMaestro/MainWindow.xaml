@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaveMaestro"
         mc:Ignorable="d"
-        Title="SaveMaestro" Height="600" Width="800" FontSize="20" FontWeight="Bold"
+        Title="SaveMaestro V1.3" Height="600" Width="800" FontSize="20" FontWeight="Bold"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <Grid RenderTransformOrigin="0.511,0.501">
