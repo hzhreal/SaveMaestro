@@ -8,6 +8,7 @@ Application to resign, decrypt and re-region PS4 saves.
 - Re-regioning
 - Multiple windows doing their own processes (dont go too crazy with this)
 - Account ID converter from username
+- Custom save encryption/decryption (GTA V & RDR2)
 
 # Tutorial
 1. Download the pkg file and install it on your PS4.
@@ -19,7 +20,6 @@ Application to resign, decrypt and re-region PS4 saves.
 
 # Disclaimers
 - Saves created using this application will work on SaveWizard as long as you copy it from your PS4.
-- Custom save encryption is not yet handled.
 - Make sure you have .NET Framework 4.7.2 installed.
 - Remember to not have the same folder for mount and upload. Have them in different paths, for example /data/example/mount & /data/example/upload.
 # No jailbroken PS4?
