@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="customcryptoWindow.xaml.cs">
+      <DependentUpon>customcryptoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DecryptWindow.xaml.cs">
       <DependentUpon>DecryptWindow.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
       <DependentUpon>ResignWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="socket.cs" />
+    <Page Include="customcryptoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DecryptWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

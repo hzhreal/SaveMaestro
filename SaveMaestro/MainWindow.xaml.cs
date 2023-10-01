@@ -23,6 +23,7 @@ using Resign;
 using Decrypt;
 using Import;
 using Reregion;
+using customcrypto;
 
 namespace SaveMaestro
 {
@@ -171,6 +172,12 @@ namespace SaveMaestro
         {
             ReregionWindow win5 = new ReregionWindow();
             win5.Show();
+        }
+
+        private void customcrypto_button_Click(object sender, RoutedEventArgs e)
+        {
+            customcryptoWindow win6 = new customcryptoWindow();
+            win6.Show();
         }
     }
 }

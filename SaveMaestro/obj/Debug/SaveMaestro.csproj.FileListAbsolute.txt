@@ -34,3 +34,5 @@ C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Wpf.Ui.dll
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\System.Drawing.Common.xml
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\bin\Debug\Wpf.Ui.xml
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\App.baml
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\customcryptoWindow.g.cs
+C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\obj\Debug\customcryptoWindow.baml
