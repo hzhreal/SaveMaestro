@@ -1,0 +1,74 @@
+﻿<Window x:Name="SaveMaestro" x:Class="SaveMaestro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaveMaestro"
+        mc:Ignorable="d"
+        Title="SaveMaestro" Height="600" Width="800" FontSize="20" FontWeight="Bold"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <Grid RenderTransformOrigin="0.511,0.501">
+        <Border 
+                BorderThickness="4">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#1A96A6" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="0.75"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Label Content="PS4 IP:" HorizontalAlignment="Left" Height="34" Margin="7,12,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.542,0.284" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.404"/>
+                    <TranslateTransform X="0.061" Y="0.023"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button x:Name="saveinput" Content="Save" HorizontalAlignment="Left" Height="30" Margin="10,239,0,0" VerticalAlignment="Top" Width="61" Click="saveinput_Click" RenderTransformOrigin="0.502,1.555"/>
+        <Label Content="Socket Port:" HorizontalAlignment="Left" Margin="5,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="127" FontSize="20" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.569"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBox x:Name="socketport" HorizontalAlignment="Left" Margin="124,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" FontSize="15" Height="45" FontWeight="Normal" RenderTransformOrigin="0.3,0.453"/>
+        <Label Content="FTP Port:" HorizontalAlignment="Left" Margin="6,101,0,0" VerticalAlignment="Top" Width="96" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
+        <TextBox x:Name="ftpport" HorizontalAlignment="Left" Margin="94,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" FontSize="15" Height="43" RenderTransformOrigin="0.533,1.229" FontWeight="Normal"/>
+        <TextBox x:Name="psip" HorizontalAlignment="Left" Margin="70,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="54" FontSize="15" FontWeight="Normal" RenderTransformOrigin="1.242,1.097"/>
+        <Label Content="PS4 Save Upload Path:" HorizontalAlignment="Left" Margin="6,141,0,0" VerticalAlignment="Top" Width="216" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
+        <TextBox x:Name="psuploadpath" HorizontalAlignment="Left" Margin="222,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="40" FontSize="15" FontWeight="Normal"/>
+        <Label Content="PS4 Mount Path:" HorizontalAlignment="Left" Margin="6,180,0,0" VerticalAlignment="Top" Width="183" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Normal"/>
+        <TextBox x:Name="mountpath" HorizontalAlignment="Left" Margin="168,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="15" FontWeight="Normal" Height="42"/>
+        <Label Content="Account ID Converter" HorizontalAlignment="Left" Margin="552,5,0,0" VerticalAlignment="Top" Width="217" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="552,47,0,0" VerticalAlignment="Top" FontSize="15" Foreground="White" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light" IsEnabled="False"/>
+        <Button x:Name="convertid" Content="Convert" HorizontalAlignment="Left" Margin="635,90,0,0" VerticalAlignment="Top" Width="87" Height="32" RenderTransformOrigin="0.623,0.434" Click="convertid_Click"/>
+        <TextBox x:Name="ps_username" HorizontalAlignment="Left" Margin="635,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" FontSize="15" FontWeight="Normal" Height="43"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="552,140,0,0" VerticalAlignment="Top" Width="48" Foreground="White" RenderTransformOrigin="0.021,0.548" FontWeight="Normal" FontFamily="Microsoft YaHei UI Light"/>
+        <TextBox x:Name="idblock" HorizontalAlignment="Left" Margin="588,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="15" Height="39"/>
+        <TextBlock x:Name="username_block" HorizontalAlignment="Left" Margin="566,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="Resign_button" Margin="68,338,629,190" Content="Resign" Click="Resign_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="Decrypt_button" Margin="240,338,457,190" Content="Decrypt" Click="Decrypt_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="Import_button" Margin="418,338,279,190" Content="Import" Click="Import_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="Reregion_button" Margin="576,338,98,190" Content="Re-region" Click="Reregion_button_Click" RenderTransformOrigin="0.789,0.251"/>
+        <Button x:Name="customcrypto_button" Margin="240,435,0,0" Content="Custom Encryptions/Decryptions" Click="customcrypto_button_Click" RenderTransformOrigin="0.789,0.251" VerticalAlignment="Top" Width="244" Height="39"/>
+    </Grid>
+
+</Window>
