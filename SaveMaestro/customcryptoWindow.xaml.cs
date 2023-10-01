@@ -191,7 +191,7 @@ namespace customcrypto
 
             }
 
-            Console.WriteLine($"Decrypted {filepath}");
+            Console.WriteLine($"Decrypted {filepath}, saved to dec_{filename}");
             MessageBox.Show($"Decrypted {filepath}");
         }
 
@@ -199,7 +199,6 @@ namespace customcrypto
         {
 
             int offset = Convert.ToInt32(start_offset, 16);
-            long offset_ = (long)offset;
 
             using (Aes cipher = Aes.Create())
             {
@@ -218,13 +217,13 @@ namespace customcrypto
                     using (FileStream f = new FileStream("enc_" + filename, FileMode.Create, FileAccess.Write))
                     {
                        f.Write(original_bytes, 0, original_bytes.Length); // write original file
-                       f.Seek(offset_, SeekOrigin.Begin); // seek to encrypted data start offset
+                       f.Seek(offset, SeekOrigin.Begin); // seek to encrypted data start offset
                        f.Write(encryptedData, 0, encryptedData.Length); // write encrypted data
                     }
                 }
             }
 
-            Console.WriteLine($"Encrypted {filepath}");
+            Console.WriteLine($"Encrypted {filepath}, saved to enc_{filename}");
             MessageBox.Show($"Encrypted {filepath}");
         }
 

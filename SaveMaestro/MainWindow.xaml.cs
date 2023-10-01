@@ -96,6 +96,12 @@ namespace SaveMaestro
             }
         }
 
+        public class UserData
+        {
+            public long userId { get; set; } // obtain from account id converter
+        }
+
+
         private async void convertid_Click(object sender, RoutedEventArgs e)
         {
             idblock.Text = String.Empty;
@@ -120,8 +126,7 @@ namespace SaveMaestro
 
 
                             dynamic userId = Convert.ToInt64(data["user_id"]);
-                            userId = userId.ToString("X");
-                            userId = userId.ToLower();
+                            userId = userId.ToString("X").ToLower();
 
                             idblock.Text = userId;
                             username_block.Text = username;
