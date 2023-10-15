@@ -23,7 +23,7 @@ using Resign;
 using Decrypt;
 using Import;
 using Reregion;
-using customcrypto;
+using CustomCrypto;
 
 namespace SaveMaestro
 {
@@ -126,7 +126,7 @@ namespace SaveMaestro
 
 
                             dynamic userId = Convert.ToInt64(data["user_id"]);
-                            userId = userId.ToString("X").ToLower();
+                            userId = userId.ToString("X").ToLower().PadLeft(16, '0');
 
                             idblock.Text = userId;
                             username_block.Text = username;
@@ -181,7 +181,7 @@ namespace SaveMaestro
 
         private void customcrypto_button_Click(object sender, RoutedEventArgs e)
         {
-            customcryptoWindow win6 = new customcryptoWindow();
+            CustomCryptoWindow win6 = new CustomCryptoWindow();
             win6.Show();
         }
     }

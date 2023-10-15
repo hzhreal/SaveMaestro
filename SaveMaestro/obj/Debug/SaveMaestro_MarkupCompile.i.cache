@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\hzh\source\repos\SaveMaestro\SaveMaestro\App.xaml
-5-1005278934
+6-1100848894
 
-121283712165
+13-540913067
 21-1188261131
-DecryptWindow.xaml;Import.xaml;MainWindow.xaml;Reregion.xaml;ResignWindow.xaml;
+CustomCryptoWindow.xaml;DecryptWindow.xaml;Import.xaml;MainWindow.xaml;Reregion.xaml;ResignWindow.xaml;
 
-False
+True
 
