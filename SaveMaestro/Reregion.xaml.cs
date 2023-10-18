@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SaveMaestro;
 using System;
 using System.Collections.Generic;
@@ -221,6 +221,38 @@ namespace Reregion
                         await f_reregion.downloadfiles2(finalpath, upath, host, f_port);
                         UpdateTerminal("Downloaded saves\nDone!");
 
+                        // xenoverse 2
+                        if (titleid == "CUSA05088" || titleid == "CUSA05350")
+                        {
+                           if (Directory.Exists(finalpath))
+                            {
+                                string[] savefiles = Directory.GetFiles(finalpath);
+                                foreach (string savefile in savefiles)
+                                {
+                                    Console.WriteLine($"Renaming {savefile}");
+                                    string folderSavefile = Path.GetDirectoryName(savefile);
+                                    Console.WriteLine(folderSavefile);
+                                    if (savefile.EndsWith(".bin"))
+                                    {
+                                        string newSavename = Path.Combine(folderSavefile, titleid + "01.bin");
+                                        Console.WriteLine($"Newname {newSavename}");
+                                        Directory.Move(savefile, newSavename);
+                                    }
+                                    else
+                                    {
+                                        string newSavename = Path.Combine(folderSavefile, titleid + "01");
+                                        Console.WriteLine($"Newname {newSavename}");
+                                        Directory.Move(savefile, newSavename);
+                                    }
+                                    
+                                }
+                            }
+                           else
+                            {
+                                throw new Exception($"Could not find {finalpath}");
+                            }
+                        }
+
                         await cleanup(delfiles, randomString);
 
                         string fullpath = System.IO.Path.GetFullPath(finalpath);
@@ -392,4 +424,3 @@ namespace Reregion
 
     }
 }
-
