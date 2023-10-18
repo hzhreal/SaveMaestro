@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -285,6 +285,7 @@ namespace SaveMaestroFTP
             long offset_1 = 0xA9C; // title id offset 1
             long offset_2 = 0x61C; // title id offset 2
             long offset = 0x15C; // account id offset
+            long xeno2Offset = 0x9F8; // xenoverse 2 savename offset
             byte[] titleid_bytes = Encoding.UTF8.GetBytes(titleid);
 
             try
@@ -301,16 +302,25 @@ namespace SaveMaestroFTP
 
                 using (FileStream param = new FileStream(parampath_local, FileMode.Open, FileAccess.Write))
                 {
-
+                    // write title id
                     param.Seek(offset_1, SeekOrigin.Begin);
                     param.Write(titleid_bytes, 0, titleid_bytes.Length);
 
                     param.Seek(offset_2, SeekOrigin.Begin);
                     param.Write(titleid_bytes, 0, titleid_bytes.Length);
 
+                    // resign
                     param.Seek(offset, SeekOrigin.Begin);
                     byte[] bytes = BitConverter.GetBytes(accid);
                     param.Write(bytes, 0, bytes.Length);
+
+                    // xenoverse 2
+                    if (titleid == "CUSA05088" || titleid == "CUSA05350")
+                    {
+                        byte[] savenameBytes = Encoding.UTF8.GetBytes(titleid + "01");
+                        param.Seek(xeno2Offset, SeekOrigin.Begin);
+                        param.Write(savenameBytes, 0, savenameBytes.Length);
+                    }
 
                 }
 
