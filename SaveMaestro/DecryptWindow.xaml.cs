@@ -158,11 +158,11 @@ namespace Decrypt
                         UpdateTerminal("Downloaded decrypted contents");
 
                         string titleid = f_decrypt.obtain_titleid(randomString);
-                        System.IO.Directory.Move(randomString, $"decrypted_{titleid}");
+                        System.IO.Directory.Move(randomString, $"decrypted_{titleid}_{savename}");
 
                         await cleanup(delfiles, randomString);
 
-                        string fullpath = System.IO.Path.GetFullPath($"decrypted_{titleid}");
+                        string fullpath = System.IO.Path.GetFullPath($"decrypted_{titleid}_{savename}");
                         UpdateTerminal($"Operation completed successfully.\n{fullpath}");
 
                     }, cts.Token);
