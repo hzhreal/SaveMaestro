@@ -17,7 +17,7 @@ namespace SaveMaestroSocket
 {
     public class socket
     {
-        const string SUCCESS = "{\"ResponseType\": \"srOk\"}'";
+        const string SUCCESS = "{\"ResponseType\": \"srOk\"}\r\n";
         public String random_gen()
         {
             Random random = new Random();
@@ -94,7 +94,7 @@ namespace SaveMaestroSocket
             
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}");
                 return "None";
             }
 
@@ -136,7 +136,7 @@ namespace SaveMaestroSocket
             
             catch(Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}");
                 return "None";
             }
         }
