@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,7 @@ namespace SaveMaestroSocket
 {
     public class socket
     {
+        const string SUCCESS = "{\"ResponseType\": \"srOk\"}'";
         public String random_gen()
         {
             Random random = new Random();
@@ -80,6 +81,12 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
+
+                    if (response != SUCCESS)
+                    {
+                        throw new Exception($"Invalid response from socket:\n{response}");
+                    }
+
                     return response;
                 }
 
@@ -116,6 +123,12 @@ namespace SaveMaestroSocket
                     int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
                     string response = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
                     Console.WriteLine(response);
+
+                    if (response != SUCCESS)
+                    {
+                        throw new Exception($"Invalid response from socket:\n{response}");
+                    }
+
                     return response;
                 }
             }
