@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using SaveMaestro;
 using System;
@@ -158,11 +158,12 @@ namespace Decrypt
                         UpdateTerminal("Downloaded decrypted contents");
 
                         string titleid = f_decrypt.obtain_titleid(randomString);
-                        System.IO.Directory.Move(randomString, $"decrypted_{titleid}_{savename}");
+
+                        System.IO.Directory.Move(randomString, $"decrypted_{titleid}_{savename}_({randomString})");
 
                         await cleanup(delfiles, randomString);
 
-                        string fullpath = System.IO.Path.GetFullPath($"decrypted_{titleid}_{savename}");
+                        string fullpath = System.IO.Path.GetFullPath($"decrypted_{titleid}_{savename}_({randomString})");
                         UpdateTerminal($"Operation completed successfully.\n{fullpath}");
 
                     }, cts.Token);
