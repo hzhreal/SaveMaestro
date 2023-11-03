@@ -222,7 +222,7 @@ namespace Reregion
                         UpdateTerminal("Downloaded saves\nDone!");
 
                         // xenoverse 2
-                        if (titleid == "CUSA05088" || titleid == "CUSA05350")
+                        if (titleid == "CUSA05088" || titleid == "CUSA05350" || titleid == "CUSA04904" || titleid == "CUSA05085" || titleid == "CUSA05774")
                         {
                            if (Directory.Exists(finalpath))
                             {
