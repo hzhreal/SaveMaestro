@@ -315,7 +315,7 @@ namespace SaveMaestroFTP
                     param.Write(bytes, 0, bytes.Length);
 
                     // xenoverse 2
-                    if (titleid == "CUSA05088" || titleid == "CUSA05350")
+                    if (titleid == "CUSA05088" || titleid == "CUSA05350" || titleid == "CUSA04904" || titleid == "CUSA05085" || titleid == "CUSA05774")
                     {
                         byte[] savenameBytes = Encoding.UTF8.GetBytes(titleid + "01");
                         param.Seek(xeno2Offset, SeekOrigin.Begin);
