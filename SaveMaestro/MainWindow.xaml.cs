@@ -106,6 +106,7 @@ namespace SaveMaestro
 
         private async void convertid_Click(object sender, RoutedEventArgs e)
         {
+            int limit = 0;
             bool checkUsername(string usernameInput)
             {
                 string uPattern = @"^[a-zA-Z0-9_-]+$";
@@ -128,7 +129,7 @@ namespace SaveMaestro
 
                             HttpResponseMessage response = await client.GetAsync(url);
 
-                            if (response.IsSuccessStatusCode)
+                            if (response.IsSuccessStatusCode && limit != 20)
                             {
                                 string jsonContent = await response.Content.ReadAsStringAsync();
                                 dynamic data = JsonConvert.DeserializeObject(jsonContent);
@@ -142,12 +143,24 @@ namespace SaveMaestro
                                     username_block.Text = username;
                                     break;
                                 }
+                                else
+                                {
+                                    limit++;
+                                }
                             }
 
                             else
                             {
-                                MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
-                                break;
+                                if (limit == 20)
+                                {
+                                    MessageBox.Show("Error finding username, website did not give back the correct value.");
+                                    break;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
+                                    break;
+                                }
                             }
 
                         }
