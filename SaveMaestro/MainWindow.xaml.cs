@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +24,8 @@ using Decrypt;
 using Import;
 using Reregion;
 using CustomCrypto;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace SaveMaestro
 {
@@ -104,40 +106,51 @@ namespace SaveMaestro
 
         private async void convertid_Click(object sender, RoutedEventArgs e)
         {
+            bool checkUsername(string usernameInput)
+            {
+                string uPattern = @"^[a-zA-Z0-9_-]+$";
+                return Regex.IsMatch(usernameInput, uPattern);
+            }
+
             idblock.Text = String.Empty;
             username_block.Text = String.Empty;
             string username = ps_username.Text;
 
-            if (!username.Contains(" ") && username.Length > 0)
+            if (!username.Contains(" ") && username.Length >= 3 && username.Length <= 16 && checkUsername(username))
             {
                 try
                 {
-
-                    using (HttpClient client = new HttpClient())
+                    while (true)
                     {
-                        string url = $"https://psn.flipscreen.games/search.php?username={username}";
-
-                        HttpResponseMessage response = await client.GetAsync(url);
-
-                        if (response.IsSuccessStatusCode)
+                        using (HttpClient client = new HttpClient())
                         {
-                            string jsonContent = await response.Content.ReadAsStringAsync();
-                            dynamic data = JsonConvert.DeserializeObject(jsonContent);
+                            string url = $"https://psn.flipscreen.games/search.php?username={username}";
 
+                            HttpResponseMessage response = await client.GetAsync(url);
 
-                            dynamic userId = Convert.ToInt64(data["user_id"]);
-                            userId = userId.ToString("X").ToLower().PadLeft(16, '0');
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string jsonContent = await response.Content.ReadAsStringAsync();
+                                dynamic data = JsonConvert.DeserializeObject(jsonContent);
+                                string obtainedUsername = Convert.ToString(data["online_id"]);
+                                if (obtainedUsername.ToLower() == username.ToLower())
+                                {
+                                    dynamic userId = Convert.ToInt64(data["user_id"]);
+                                    userId = userId.ToString("X").ToLower().PadLeft(16, '0');
 
-                            idblock.Text = userId;
-                            username_block.Text = username;
+                                    idblock.Text = userId;
+                                    username_block.Text = username;
+                                    break;
+                                }
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
+                                break;
+                            }
+
                         }
-
-                        else
-                        {
-                            MessageBox.Show("Error finding username, are you sure you have the right privacy settings to be found?");
-                        }
-
-
                     }
                 }
 
